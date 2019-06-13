@@ -18,7 +18,6 @@ namespace Thread.ViewModel
         public Thread.Command.DecryptCommand.Stop Stop  { get; set; }
         public Thread.Command.DecryptCommand.Pause pause { get; set; }
         public Thread.Command.DecryptCommand.Resume Resume { get; set; }
-
         public System.Threading.Thread Encrypt_thread;
       public  System.Threading.Thread Dectypt_thread;
         public Text()
@@ -37,11 +36,11 @@ namespace Thread.ViewModel
             //string[] a = Name.Split(' ');
             //for (int i = 0; i < a.Length; i++)
             //{
-            //  a[i]= Encrypt_Decrypt.Encrypt_Decrypt.Encrypt(a[i]);
+            //    a[i] = Encrypt_Decrypt.Encrypt_Decrypt.Encrypt(a[i]);
             //}
             //System.IO.File.WriteAllLines("Text.txt", a);
 
-             EncryptList = new ObservableCollection<string>();
+            EncryptList = new ObservableCollection<string>();
              DecryptList = new ObservableCollection<string>();
              Encrypt_thread = new System.Threading.Thread(new System.Threading.ThreadStart( Encrypt));
              Dectypt_thread = new System.Threading.Thread(new System.Threading.ThreadStart( Dectypt));
@@ -49,30 +48,44 @@ namespace Thread.ViewModel
         }
       public  void Start()
         {
+            if (Encrypt_thread.ThreadState == System.Threading.ThreadState.Unstarted)
+            {
 
-              Encrypt_thread.Start();
-              Dectypt_thread.Start();
+                Encrypt_thread.Start();
+            }
+        }
+        public void Start1()
+        {
+            if (Dectypt_thread.ThreadState == System.Threading.ThreadState.Unstarted && EncryptList.Count!=0)
+            {
 
+                Dectypt_thread.Start();
+            }
         }
         void Encrypt()
         {
             StreamReader file = new StreamReader("Text.txt");
             string Name;
+
             while ((Name = file.ReadLine()) != null)
             {
-                EncryptList.Add(Name);
+                App.Current.Dispatcher.Invoke(() =>
+                EncryptList.Add(Name)
+                    );
+                System.Threading.Thread.Sleep(1000);
             }
         }
         void Dectypt()
         {
             for (int i = 0; i < EncryptList.Count; i++)
             {
-
-                DecryptList.Add(Encrypt_Decrypt.Encrypt_Decrypt.Decrypt(EncryptList[i]));
+                App.Current.Dispatcher.Invoke(() =>
+                 DecryptList.Add(Encrypt_Decrypt.Encrypt_Decrypt.Decrypt(EncryptList[i]))
+                    );
+                System.Threading.Thread.Sleep(1000);
             }
+            Dectypt_thread.Abort(); 
         }
-
-
         ObservableCollection<string> encryptList;
         public ObservableCollection<string> EncryptList
         {

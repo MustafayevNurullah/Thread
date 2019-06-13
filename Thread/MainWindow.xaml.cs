@@ -33,7 +33,14 @@ namespace Thread
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Text.Start();
+           
+                Text.Start();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Text.Start1();
+
         }
     }
 }

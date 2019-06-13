@@ -23,8 +23,11 @@ namespace Thread.Command.DecryptCommand
 
         public void Execute(object parameter)
         {
-            text.Dectypt_thread.Abort();
-
+            if (text.Dectypt_thread.ThreadState != System.Threading.ThreadState.Aborted)
+            {
+                text.Dectypt_thread.Resume();
+                text.Dectypt_thread.Abort();
+            }
         }
     }
 }

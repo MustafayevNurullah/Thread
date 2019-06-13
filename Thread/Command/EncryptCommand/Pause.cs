@@ -21,9 +21,13 @@ namespace Thread.Command.EncryptCommand
             return true;
         }
 
+        [Obsolete]
         public void Execute(object parameter)
         {
-            Text.Encrypt_thread.Suspend();
+            if (Text.Encrypt_thread.ThreadState != System.Threading.ThreadState.Stopped )
+            {
+                Text.Encrypt_thread.Suspend();
+            }
         }
     }
 }

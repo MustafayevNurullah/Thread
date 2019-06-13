@@ -23,7 +23,10 @@ namespace Thread.Command.EncryptCommand
 
         public void Execute(object parameter)
         {
-            Text.Encrypt_thread.Resume();
+            if(Text.Encrypt_thread.ThreadState==System.Threading.ThreadState.Suspended && Text.Encrypt_thread.ThreadState != System.Threading.ThreadState.Stopped)
+            {
+                Text.Encrypt_thread.Resume();
+            }
         }
     }
 }

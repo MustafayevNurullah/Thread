@@ -24,7 +24,10 @@ namespace Thread.Command.DecryptCommand
 
         public void Execute(object parameter)
         {
-            text.Dectypt_thread.Suspend();
+            if (text.Dectypt_thread.ThreadState != System.Threading.ThreadState.Stopped)
+            {
+                text.Dectypt_thread.Suspend();
+            }
         }
     }
 }

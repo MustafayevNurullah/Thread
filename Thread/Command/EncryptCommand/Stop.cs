@@ -23,7 +23,11 @@ namespace Thread.Command.EncryptCommand
 
         public void Execute(object parameter)
         {
-            text.Encrypt_thread.Abort();
+            if (text.Encrypt_thread.ThreadState != System.Threading.ThreadState.Aborted)
+            {
+                text.Encrypt_thread.Resume();
+                text.Encrypt_thread.Abort();
+            }
         }
     }
 }

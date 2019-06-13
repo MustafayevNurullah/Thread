@@ -14,7 +14,7 @@
         <Grid Grid.Column="1">
             <StackPanel>
 
-                <ListView  Height="200" ItemsSource="{Binding DecryptList,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top">
+                <ListView  Height="200" ItemsSource="{Binding DecryptList,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" VerticalAlignment="Top">
                 <ListView.View>
                     <GridView>
                             <GridViewColumn Width="400"  Header="Name" >
@@ -28,9 +28,11 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-                <Button  Height="70" Content="Stop" Command="{Binding Stop}"></Button>
-                <Button Height="70" Content="Pause" Command="{Binding pause}" ></Button>
-                <Button Height="70" Content="Resume" Command="{Binding Resume}"></Button>
+                <Button  Height="50" Content="Stop" Command="{Binding Stop}"></Button>
+                <Button Height="50" Content="Pause" Command="{Binding pause}" ></Button>
+                <Button Height="50" Content="Resume" Command="{Binding Resume}"></Button>
+                <Button Height="50" Content="Start" Click="Button_Click_1"></Button>
+
             </StackPanel>
         </Grid>
         <StackPanel>
@@ -45,18 +47,15 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                    
                     </GridView>
             </ListView.View>
         </ListView>
-            <Button  Height="50" Content="Stop" Command="{Binding stop}"></Button>
+            <Button  Height="50" Content="Stop" Command="{Binding stop}">
+            </Button>
             <Button Height="50" Content="Pause" Command="{Binding Pause}" ></Button>
             <Button Height="50" Command="{Binding resume}"  Content="Resume"></Button>
-            <Button Height="50" Click="Button_Click"   Content="Start"></Button>
-
+            <Button Height="50" Click="Button_Click"   Content="Start">
+            </Button>
         </StackPanel>
-        
-        
-        
     </Grid>
 </Window>
