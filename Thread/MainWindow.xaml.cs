@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Thread.ViewModel;
 
 namespace Thread
 {
@@ -20,9 +21,19 @@ namespace Thread
     /// </summary>
     public partial class MainWindow : Window
     {
+        Text Text;
         public MainWindow()
         {
+
             InitializeComponent();
+            Text text = new Text();
+            DataContext =text;
+            Text = text;
+    }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Text.Start();
         }
     }
 }
